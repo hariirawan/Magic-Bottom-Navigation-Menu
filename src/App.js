@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import {
+  BsFillBagCheckFill,
+  BsFillHouseFill,
+  BsFillChatSquareFill,
+  BsClockFill,
+  BsGearFill,
+} from "react-icons/bs";
+import "./App.css";
 
 function App() {
+  const [selected, setSelected] = useState(0);
+
+  const menus = [
+    {
+      icon: <BsFillHouseFill size={25} />,
+      name: "Home",
+    },
+    {
+      icon: <BsFillBagCheckFill size={25} />,
+      name: "Orders",
+    },
+    {
+      icon: <BsFillChatSquareFill size={25} />,
+      name: "Chat",
+    },
+    {
+      icon: <BsClockFill size={25} />,
+      name: "History",
+    },
+    {
+      icon: <BsGearFill size={25} />,
+      name: "Settings",
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="navigation">
+      <ul>
+        {menus.map((val, index) => {
+          return (
+            <li
+              onClick={() => setSelected(index)}
+              key={index}
+              className={index === selected ? "active" : ""}
+            >
+              <div className="icon">{val.icon}</div>
+              <div className="name">{val.name}</div>
+            </li>
+          );
+        })}
+        <div className="menu-bg" />
+      </ul>
     </div>
   );
 }
